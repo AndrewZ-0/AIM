@@ -3,7 +3,7 @@
 #include "pkff.h"
 
 template<typename T>
-void write_raw(std::ofstream& os, const T& data) {
+inline void write_raw(std::ofstream& os, const T& data) {
     os.write(reinterpret_cast<const char*>(&data), sizeof(data));
 }
 void write_pkf(const std::string& filename, const PKF& pkf) {
@@ -24,7 +24,7 @@ void write_pkf(const std::string& filename, const PKF& pkf) {
 }
 
 template<typename T>
-void read_raw(std::ifstream& is, T& data) {
+inline void read_raw(std::ifstream& is, T& data) {
     is.read(reinterpret_cast<char*>(&data), sizeof(data));
 }
 void read_pkf(const std::string& filename, PKF& pkf) {

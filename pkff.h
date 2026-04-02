@@ -11,10 +11,40 @@
 #define f32 float
 #define Vec std::vector
 
+struct R3 {
+    f64 x, y, z;
+};
+
+inline R3 operator*(const f64 k, R3 v) {
+    v.x *= k;
+    v.y *= k;
+    v.z *= k;
+    return v;
+}
+inline R3 operator-(R3 v1, const R3& v2) {
+    v1.x -= v2.x;
+    v1.y -= v2.y;
+    v1.z -= v2.z;
+    return v1;
+}
+inline void operator+=(R3& v1, const R3& v2) {
+    v1.x += v2.x;
+    v1.y += v2.y;
+    v1.z += v2.z;
+}
+inline void operator*=(R3& v, const f64 k) {
+    v.x *= k;
+    v.y *= k;
+    v.z *= k;
+}
+
+inline f64 len_sq(const R3& v) {
+    return v.x * v.x + v.y * v.y + v.z * v.z;
+}
 
 struct Keyframe {
-    f32 x, y, z;
-    u16 dt_skip;
+    R3 s;
+    u32 dt_skip;
 };
 
 struct PKF {
