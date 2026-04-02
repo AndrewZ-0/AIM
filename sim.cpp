@@ -41,7 +41,7 @@ inline void run_leapfrog(Particles& p, PKF& pkf, usize N) {
     pkf.particles.resize(N);
 
     for (usize i = 0; i < N; i++) {
-        pkf.particles[i].push_back(Keyframe{p.s[i], 0});
+        pkf.particles[i].push_back(Keyframe{toR3s(p.s[i]), 0});
     }
 
     const f32 epsilon_sq = epsilon * epsilon;
@@ -59,8 +59,8 @@ inline void run_leapfrog(Particles& p, PKF& pkf, usize N) {
         for (usize i = 0; i < N; i++) {
             p.v[i] += k * p.a[i];
 
-            if (len_sq(p.s[i] - pkf.particles[i].back().s) >= epsilon_sq) {
-                pkf.particles[i].push_back(Keyframe{p.s[i], nt});
+            if (len_sq(toR3s(p.s[i]) - pkf.particles[i].back().s) >= epsilon_sq) {
+                pkf.particles[i].push_back(Keyframe{toR3s(p.s[i]), nt});
             }
         }
     }

@@ -42,8 +42,31 @@ inline f64 len_sq(const R3& v) {
     return v.x * v.x + v.y * v.y + v.z * v.z;
 }
 
+struct R3s {
+    f32 x, y, z;
+};
+
+inline const R3s toR3s(const R3& v) {
+    return {
+        static_cast<f32>(v.x), 
+        static_cast<f32>(v.y), 
+        static_cast<f32>(v.z), 
+    };
+}
+
+inline R3s operator-(R3s v1, const R3s& v2) {
+    v1.x -= v2.x;
+    v1.y -= v2.y;
+    v1.z -= v2.z;
+    return v1;
+}
+
+inline f32 len_sq(const R3s& v) {
+    return v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
 struct Keyframe {
-    R3 s;
+    R3s s;
     u32 dt_skip;
 };
 

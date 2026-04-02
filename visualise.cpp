@@ -51,7 +51,7 @@ int main() {
                 keyframe_idx[i]++;
             }
 
-            R3 pos3 = track[keyframe_idx[i]].s;
+            R3s pos3 = track[keyframe_idx[i]].s;
 
             const Vector3 pos = {
                 static_cast<f32>(pos3.x / init_d),
