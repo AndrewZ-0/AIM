@@ -6,7 +6,9 @@ template<typename T>
 void write_raw(std::ofstream& os, const T& data) {
     os.write(reinterpret_cast<const char*>(&data), sizeof(data));
 }
-void write_pkf(std::ofstream& os, const std::string& filename, const PKF& pkf) {
+void write_pkf(const std::string& filename, const PKF& pkf) {
+    std::ofstream os;
+
     os.open(filename, std::ios::binary);
     u32 num_particles = pkf.particles.size();
     write_raw(os, num_particles);
@@ -25,7 +27,9 @@ template<typename T>
 void read_raw(std::ifstream& is, T& data) {
     is.read(reinterpret_cast<char*>(&data), sizeof(data));
 }
-void read_pkf(std::ifstream& is, const std::string& filename, PKF& pkf) {
+void read_pkf(const std::string& filename, PKF& pkf) {
+    std::ifstream is;
+
     is.open(filename, std::ios::binary);
     u32 num_particles;
     read_raw(is, num_particles);
